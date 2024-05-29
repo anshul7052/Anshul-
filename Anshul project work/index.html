@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 4px;
+            padding: 2px;
+        }
+
+        body {
+            background-color: bisque;
+        }
+
+        .boxes {
+            display: flex;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        nav {
+            max-width: 80vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            height: 63px;
+            font-size: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 8px;
+            height: 70px;
+        }
+
+        nav :nth-child(1) {
+            height: 30px;
+            color: rgb(11, 8, 8);
+            border-radius: 8px;
+        }
+
+        @keyframes anshulkaanimation {
+            from {}
+            to {
+                transform: translate(1000px);
+            }
+        }
+
+        nav :nth-child(2) {
+            height: 30px;
+            color: darkslategrey;
+            border-radius: 8px;
+            margin: 0px;
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 100%;
+            max-height: 80px;
+            overflow-y: auto;
+            display: none;
+            font-size: small;
+        }
+
+        .search-results.show {
+            display: block;
+            animation: fade-in 0.5s ease-in-out;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .search-results a {
+            color: black;
+            padding: 6px 8px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .search-results a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .box2 {
+            display: flex;
+            background-color: blue;
+            align-items: center;
+            justify-content: space-around;
+            width: 80vw;
+            margin: auto;
+            font-size: xx-large;
+            border-radius: 13px;
+            font-family: cursive height: 80px;
+            animation: anshulkaanimation 5s cubic-bezier(0, -0.85, 0.46, 1.47) 3 reverse;
+        }
+
+        .boxes3 {
+            display: flex;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        .button {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        div button {
+            height: 30px;
+            border-radius: 9px;
+        }
+
+        .boxes4 {
+            display: flex;
+            align-items: flex-end;
+            text-align: right;
+            margin-left: 13px;
+            font-size: larger;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: cornflowerblue;
+            background-color: black;
+            list-style: none;
+        }
+
+        .boxes4 li {
+            animation: slide-in 1s ease-in-out;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <span>Shopkart</span>
+        <div>
+            <input type="text" placeholder="Search Product" id="search-input">
+            <button>Go</button>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </nav>
+    <div class="boxes">
+        <div class="box">
+            <img src="images/shoes discount.avif" alt="">
+        </div>
+        <div class="box">
+            <img src="images/image for website.jpeg" alt="">
+        </div>
+    </div>
+    <div class="box2">
+        <span>BUY 2 GET 1 FREE OFFER IS NOW AVAILABLE</span>
+    </div>
+    <div class="boxes3">
+        <div class="box3">
+            <img src="images/mobile-accessories-coupons.jpg" alt="">
+        </div>
+        <div>
+            <img src="images/perfume image.jpg" alt="">
+        </div>
+    </div>
+    <div class="button">
+        <button>Show More>></button>
+    </div>
+    <div>
+        <ol class="boxes4">
+            <li><a href="Home">Home</a></li>
+            <li><a href="About">About</a></li>
+            <li><a href="Contact Us">Contact Us</a></li>
+        </ol>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        // Dummy product data for demonstration
+        const products = [
+            'Smartphone',
+            'Laptop',
+            'Headphones',
+            'Smartwatch',
+            'Tablet',
+            'Camera',
+            'Gaming Console',
+            'Speakers',
+            'Keyboard',
+            'Mouse'
+        ];
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const matchedProducts = products.filter(product => product.toLowerCase().includes(searchTerm));
+
+            searchResults.innerHTML = '';
+
+            if (searchTerm.length > 0) {
+                matchedProducts.forEach(product => {
+                    const resultLink = document.createElement('a');
+                    resultLink.textContent = product;
+                    resultLink.href = '#';
+                    searchResults.appendChild(resultLink);
+                });
+
+                searchResults.classList.add('show');
+            } else {
+                searchResults.classList.remove('show');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#search-input')) {
+                searchResults.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
